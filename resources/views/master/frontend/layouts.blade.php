@@ -105,15 +105,27 @@
                             </div>
                             <a href="#" class="bk-btn">Booking Now</a>
                             <div class="language-option">
-                               
-                                <span>LOGIN <i class="fa fa-angle-down"></i></span>
-                                <div class="flag-dropdown">
-                                    <ul>
-                                        <li><a href="#">Zi</a></li>
-                                        <li><a href="#">Fr</a></li>
-                                    </ul>
-                                </div>
+                                
+                                @guest
+                                    <a href="{{ route('login') }}" style="color: black" class="ACTIVE">LOGIN</a>
+                                    
+                                @else
+                                    <span>  {{ auth()->user()->name }} <i class="fa fa-angle-down"></i></span>                                    
+                                    <div class="flag-dropdown">
+                                        <ul>
+                                            <li><a href="{{ route('profile.edit') }}"> Profile</a></li>
+                                            <li>
+                                                <a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                                                    <form action="{{ route('logout') }}" id="logout-form" method="post">
+                                                    @csrf 
+
+                                                    </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @endguest
                             </div>
+                            
                         </div>
                     </div>
                 </div>
